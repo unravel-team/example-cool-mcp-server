@@ -203,4 +203,4 @@ deploy: build  ## Deploy to Clojars. needs `CLOJARS_USERNAME` and `CLOJARS_PASSW
 	clojure -T:build deploy
 
 clean:
-    rm -rf target/
+	rm -rf target/

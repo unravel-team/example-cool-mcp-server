@@ -1,0 +1,22 @@
+{:aliases
+ {:build {:deps {io.github.clojure/tools.build {:mvn/version "0.10.8"},
+                 slipset/deps-deploy {:mvn/version "0.2.2"}},
+          :ns-default build},
+  :run-server
+  {:command "java",
+   :args
+   ["-Dclojure.tools.logging.factory=clojure.tools.logging.impl/log4j2-factory"
+    "-Dorg.eclipse.jetty.util.log.class=org.eclipse.jetty.util.log.Slf4jLog"
+    "-Dlog4j2.contextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector"
+    "-Dlog4j2.configurationFile=log4j2-mcp.xml"
+    "-Dbabashka.json.provider=metosin/jsonista" "-Dlogging.level=INFO" "-cp"
+    "/Users/vedang/tech/unravel/target/example-cool-mcp-server-1.0.0.jar" "tech.unravel.example-cool-mcp-server"]},
+  :test {:extra-deps {io.github.cognitect-labs/test-runner {:git/sha "dfb30dd",
+                                                            :git/tag "v0.5.1"},
+                      org.clojure/test.check {:mvn/version "1.1.1"}},
+         :extra-paths ["test"]}},
+ :deps {io.modelcontextprotocol/mcp-clojure-sdk
+        {:git/sha "8ece56ac2e887e1913fb675b6807629538e73652",
+         :git/url "https://github.com/unravel-team/mcp-clojure-sdk.git"},
+        org.clojure/clojure {:mvn/version "1.12.0"}},
+ :paths ["src" "resources"]}

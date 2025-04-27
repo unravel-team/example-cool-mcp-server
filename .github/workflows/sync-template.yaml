@@ -1,0 +1,30 @@
+name: Sync from Parent Template repository
+
+on:
+  workflow_dispatch:
+
+env:
+  SOURCE_BRANCH: main
+  SOURCE_REPOSITORY: unravel-team/example-cool-mcp-server
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout the Repo
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT }}
+
+      - name: Sync Parent Template with the Repo
+        uses: AndreasAugustin/actions-template-sync@v2
+        with:
+          source_gh_token: ${{ secrets.GH_PAT }}
+          source_repo_path: ${{ env.SOURCE_REPOSITORY }}
+          upstream_branch: ${{ env.SOURCE_BRANCH }}
+          pr_title: "[FROM TEMPLATE] Sync new changes from example-cool-mcp-server"
+          pr_commit_msg: "chore(template): Sync new changes from example-cool-mcp-server"
